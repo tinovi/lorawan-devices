@@ -5,6 +5,8 @@ description: First generation of OpenCollar devices. A collection of advanced de
 hardwareVersions:
   - version: '2.3'
     numeric: 1
+
+firmwareVersions:
   - # Firmware version 2.6
     version: '2.6'
     numeric: 1
@@ -14,11 +16,11 @@ hardwareVersions:
       EU863-870:
         id: opencollar-profile-eu868
         lorawanCertified: false
-        codec: opencollar_v2.6-codec
+        codec: opencollar-v26-codec
 
 # Product and data sheet URLs (optional)
 productURL: https://www.smartparks.org
 
 # Photos
 photos:
-  main: opencollar_collection.jpg
+  main: opencollar-collection.jpg
