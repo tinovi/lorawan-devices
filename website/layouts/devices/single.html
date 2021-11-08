@@ -66,6 +66,7 @@
         <div class="grid">
           <div class="item-10">
             <h3>Contact Partner</h3>
+            <p class="contact__error"></p>
           </div>
           <div class="item-2 item-m" style="justify-self: end;">
             <span id="partner-cross" type="button"><svg width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.233.43L7.929 5.732 2.626.43.86 2.197 6.16 7.5.86 12.803l1.767 1.767L7.93 9.267l5.304 5.303L15 12.802 9.698 7.5 15 2.197 13.233.43z" fill="#B7B6BC"/></svg></span>
@@ -106,11 +107,28 @@
   document.getElementById('contact').addEventListener("submit", handleSubmit);
 
   function handleContact() {
+    clearError()
+    clearForm()
     const form = document.getElementsByClassName('js-contact')[0].classList.toggle("contact--hidden")
+  }
+
+  var contactError = document.getElementsByClassName("contact__error")[0]
+
+  function setError(message) {
+    contactError.innerHTML = message
+  }
+
+  function clearError() {
+    contactError.innerHTML = ""
+  }
+
+  function clearForm() {
+    document.getElementById('contact').reset()
   }
 
   function handleSubmit(e) {
     e.preventDefault()
+    clearError()
 
     fetch('https://www.thethingsnetwork.org/api/partners/contact-partner/', {
       method: 'POST',
@@ -120,10 +138,14 @@
       }
     }).then(function (response) {
       if (response.ok) {
-        e.target.reset()
+        clearForm()
         handleContact()
+      } else {
+        setError("There was an error, please try again.")
       }
-    })
+    }).catch(function() {
+      setError("There was an error, please try again.")
+    });
   }
 
 </script>
